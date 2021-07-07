@@ -21,8 +21,14 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        viewModel.movieList.observe(this, {
-            Log.d(TAG, "onCreate: ${it[0]}")
+        viewModel.movieList.observe(this, { name ->
+            Log.d(
+                TAG, "onCreate: ${
+                    name.forEach {
+                        println(it)
+                    }
+                }"
+            )
         })
 
         viewModel.errorMessage.observe(this, {
@@ -35,7 +41,6 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getAllAnimes()
 
-        Log.d(TAG, "onCreate: Llego hasta aqui")
     }
 
 }

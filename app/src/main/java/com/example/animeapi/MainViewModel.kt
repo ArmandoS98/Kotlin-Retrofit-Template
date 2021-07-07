@@ -3,7 +3,6 @@ package com.example.animeapi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.animeapi.api.MyRetrofitBuilder
-import com.example.animeapi.model.Anime
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Main
 
