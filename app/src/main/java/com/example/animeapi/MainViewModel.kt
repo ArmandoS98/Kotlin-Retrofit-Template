@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.animeapi.api.MyRetrofitBuilder
 import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 
 class MainViewModel : ViewModel() {
@@ -14,10 +15,11 @@ class MainViewModel : ViewModel() {
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         onError("Exception handled: ${throwable.localizedMessage}")
     }
+
     val loading = MutableLiveData<Boolean>()
 
     fun getAllAnimes() {
-        job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
+        job = CoroutineScope(IO + exceptionHandler).launch {
             val response = MyRetrofitBuilder.apiService.getAnimes()
             withContext(Main) {
                 if (response.isSuccessful) {
@@ -30,6 +32,8 @@ class MainViewModel : ViewModel() {
         }
 
     }
+
+
 
     private fun onError(message: String) {
         errorMessage.value = message

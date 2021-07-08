@@ -2,6 +2,7 @@ package com.example.animeapi
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.animeapi.api.MyRetrofitBuilder
@@ -19,9 +20,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Instaciando Retrofit
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+
         viewModel.movieList.observe(this, { name ->
+
+
+
             Log.d(
                 TAG, "onCreate: ${
                     name.forEach {
@@ -33,14 +39,19 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.errorMessage.observe(this, {
             Log.e(TAG, "onCreate: $it")
+            Toast.makeText(this, "Error: $it", Toast.LENGTH_LONG).show()
         })
 
         viewModel.loading.observe(this, {
-            Log.d(TAG, "onCreate: $it")
+            //Se coloca codigo de animacion aqui
+            if (it){
+
+            }else{
+
+            }
         })
 
         viewModel.getAllAnimes()
-
     }
 
 }
